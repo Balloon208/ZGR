@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButton("up") && lastinput == Direction.up) dir = Direction.up;
         if (Input.GetButton("down") && lastinput == Direction.down) dir = Direction.down;
 
-        lastinput = Direction.none;
+        getLastInput();
     }
 
     void getLastInput()
@@ -46,7 +46,6 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         setDirection();
-        getLastInput();
         if (dir != Direction.none && !Lock)
         {
             Lock = true;

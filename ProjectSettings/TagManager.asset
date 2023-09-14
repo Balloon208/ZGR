@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Select1
+  - Select2
+  - Select3
+  - Select4
   layers:
   - Default
   - TransparentFX
