@@ -44,6 +44,8 @@ public class Select : MonoBehaviour
             }
             yield return null;
         }
+
+        Bar[k].GetComponent<Animator>().Play("ResetColor");
         Debug.Log("Selected");
     }
 }

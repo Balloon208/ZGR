@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class TextScript : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class TextScript : MonoBehaviour
     {
         public Mode mode;
         public string name;
+        [Multiline(3)]
         public string text;
     }
 
