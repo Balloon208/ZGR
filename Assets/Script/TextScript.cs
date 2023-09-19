@@ -9,7 +9,8 @@ public class TextScript : MonoBehaviour
     public enum Mode
     {
         Text,
-        Function
+        Select2,
+        Select4 
     };
 
     [System.Serializable]
@@ -22,59 +23,80 @@ public class TextScript : MonoBehaviour
 
     public Text nameline;
     public Text textline;
-    [Tooltip ("Text - Name 과 Text 작성\nFunction - Name에 함수 이름 작성, Text에 매개변수 입력\n* 매개변수는 ',' 로 파싱")]
-    public Scripts[] scripts = new Scripts[5];
-    
+    [Tooltip("Text - Name 과 Text 작성\nFunction - Name에 함수 이름 작성, Text에 매개변수 입력\n* 매개변수는 ',' 로 파싱")]
+    public Scripts[] scripts;
+    private bool coroutine_lock = false;
 
     // Start is called before the first frame update
 
-    public void StartFunction(string functionname, string inspector)
+    public IEnumerator ShowText(string text)
     {
-        string[] splitlist = inspector.Split(',');
+        coroutine_lock = true;
+        int maxlength = text.Length;
+        float speed = 0.1f;
 
-        FunctionList functionlist = new FunctionList();
-        Type type = functionlist.GetType();
+        string temptext = "";
 
-        type.GetMethod(functionname)?.Invoke(functionlist, splitlist);
+        for (int j = 0; j < maxlength; j++)
+        {
+            temptext += text[j];
+
+            textline.text = temptext;
+
+            Debug.Log(textline.text);
+
+            if (j >= 3 && Input.GetKey(KeyCode.Space)) speed = 0.02f;
+
+            yield return new WaitForSeconds(speed);
+        }
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+
+        coroutine_lock = false;
     }
 
-    IEnumerator fullshow()
+    IEnumerator Fullshow()
     {
         for (int i = 0; i < scripts.Length; i++)
         {
+            Debug.Log(i);
             if (scripts[i].mode == Mode.Text)
             {
                 nameline.text = scripts[i].name;
 
                 string textp = scripts[i].text;
-                int maxlength = textp.Length;
-                float speed = 0.1f;
 
-                string temptext = "";
-
-                for (int j = 0; j < maxlength; j++)
-                {
-                    temptext += textp[j];
-
-                    textline.text = temptext;
-
-                    Debug.Log(textline.text);
-
-                    if (j>=3 && Input.GetKey(KeyCode.Space)) speed = 0.02f;
-
-                    yield return new WaitForSeconds(speed);
-                }
-                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+                StartCoroutine(ShowText(textp));
+                yield return new WaitUntil(() => coroutine_lock==false);
             }
-            else if (scripts[i].mode == Mode.Function)
+            if (scripts[i].mode == Mode.Select2)
             {
-                StartFunction(scripts[i].name, scripts[i].text);
+                GameObject.Find("Barlist").transform.Find("2_Bar").gameObject.SetActive(true);
+
+                Text t1 = GameObject.FindWithTag("Select1").GetComponent<Text>();
+                Text t2 = GameObject.FindWithTag("Select2").GetComponent<Text>();
+
+                StartCoroutine(Select.Selecting(2));
+                yield return new WaitUntil(() => Select.selected == true);
             }
-        } 
+            if (scripts[i].mode == Mode.Select4)
+            {
+                GameObject.Find("Barlist").transform.Find("4_Bar").gameObject.SetActive(true);
+
+                Text t1 = GameObject.FindWithTag("Select1").GetComponent<Text>();
+                Text t2 = GameObject.FindWithTag("Select2").GetComponent<Text>();
+                Text t3 = GameObject.FindWithTag("Select3").GetComponent<Text>();
+                Text t4 = GameObject.FindWithTag("Select4").GetComponent<Text>();
+
+                StartCoroutine(Select.Selecting(4));
+                yield return new WaitUntil(() => Select.selected == true);
+            }
+        }
+
+        Debug.Log("End");
     }
 
     public void StartScript()
     {
-        StartCoroutine(fullshow());
+        StartCoroutine(Fullshow());
     }
 }

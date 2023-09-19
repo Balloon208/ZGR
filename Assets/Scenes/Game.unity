@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &113764411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+  m_PrefabInstance: {fileID: 1039703692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &114879948
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,11 +276,11 @@ GameObject:
   - component: {fileID: 226749037}
   - component: {fileID: 226749036}
   m_Layer: 5
-  m_Name: Text (1)
-  m_TagString: Untagged
+  m_Name: Text
+  m_TagString: Textline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &226749035
 RectTransform:
@@ -339,6 +344,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226749034}
   m_CullTransparentMesh: 1
+--- !u!1 &327873705 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+  m_PrefabInstance: {fileID: 2015929269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &334708335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,6 +356,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1914890906}
     m_Modifications:
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8196079
+      objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Name
       value: Select1
@@ -544,7 +566,7 @@ GameObject:
   - component: {fileID: 386708785}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,10 +671,10 @@ MonoBehaviour:
     text: test1dasdfasdfasdf
   - mode: 0
     name: t2
-    text: test2asdfasdfasdfsafsdf
-  - mode: 1
-    name: Select4
-    text: Subin,Babo,Is,True
+    text: teasdfasfd
+  - mode: 2
+    name: 
+    text: 
 --- !u!1 &418500847
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +762,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1914890906}
     m_Modifications:
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8196079
+      objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Name
       value: Select3
@@ -1084,6 +1118,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1240dc34e7b6494c998a75a360a259b, type: 3}
+--- !u!1 &670009968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+  m_PrefabInstance: {fileID: 334708335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &670009972
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670009968}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9db2b1c8bcd43524380fc8fc818f2b87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &689740139 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 122375119873516975, guid: e1240dc34e7b6494c998a75a360a259b, type: 3}
@@ -1102,15 +1162,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Color.b
-      value: 0.73333335
+      value: 0.8196079
       objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Color.g
-      value: 0.73333335
+      value: 0.8196079
       objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Color.r
-      value: 0.73333335
+      value: 0.8196079
       objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Name
@@ -1536,11 +1596,11 @@ GameObject:
   - component: {fileID: 1018289494}
   - component: {fileID: 1018289493}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
+  m_Name: Name
+  m_TagString: Nameline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1018289492
 RectTransform:
@@ -1611,6 +1671,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1914890906}
     m_Modifications:
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8196079
+      objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Name
       value: Select2
@@ -1710,6 +1782,27 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7128878733178503350, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
   m_PrefabInstance: {fileID: 1039703692}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1039703697
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113764411}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9db2b1c8bcd43524380fc8fc818f2b87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1097438567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,6 +1920,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1370702660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+  m_PrefabInstance: {fileID: 424608203}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1370702664
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370702660}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9db2b1c8bcd43524380fc8fc818f2b87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1434731116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
@@ -2625,6 +2744,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1914890906}
     m_Modifications:
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8196079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128878733178503344, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8196079
+      objectReference: {fileID: 0}
     - target: {fileID: 7128878733178503349, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
       propertyPath: m_Name
       value: Select4
@@ -2724,6 +2855,27 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7128878733178503350, guid: db8519fc5261b894484aa1a8d6488f4c, type: 3}
   m_PrefabInstance: {fileID: 2015929269}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2015929274
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327873705}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9db2b1c8bcd43524380fc8fc818f2b87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2027148945
 GameObject:
   m_ObjectHideFlags: 0

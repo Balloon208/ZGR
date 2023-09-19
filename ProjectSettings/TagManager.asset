@@ -8,6 +8,9 @@ TagManager:
   - Select2
   - Select3
   - Select4
+  - Nameline
+  - Textline
+  - Event
   layers:
   - Default
   - TransparentFX
