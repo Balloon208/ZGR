@@ -299,8 +299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 240, y: -70}
-  m_SizeDelta: {x: 1600, y: 300}
+  m_AnchoredPosition: {x: 377, y: -70}
+  m_SizeDelta: {x: 4400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &226749036
 MonoBehaviour:
@@ -667,11 +667,14 @@ MonoBehaviour:
   textline: {fileID: 226749036}
   scripts:
   - mode: 0
-    name: t1
-    text: test1dasdfasdfasdf
+    name: "\uAE40\uBBFC\uC900"
+    text: "\uD06C\uD751, \uC5B4\uB460\uC758 \uAD70\uC8FC \uD06C\uB9AC\uC2A4 \uB2D8\uAED8\uC11C
+      \uB098\uB97C \uBC1B\uC544\uB4E4\uC5EC \uC8FC\uC2DC\uC9C0 \uBABB\uD588\uC5B4
+      \uC820\uC7A5."
   - mode: 0
-    name: t2
-    text: teasdfasfd
+    name: "\uAE40\uBBFC\uC900"
+    text: "\uC5B4\uCA54 \uC218 \uC5C6\uAD70.\n\uB098 \uD63C\uC790 \uCE74\uC624\uC2A4
+      \uC138\uC774\uBC84\uB97C \uC5F0\uB9C8\uD574\uC57C\uACA0\uAD70."
   - mode: 2
     name: 
     text: 
