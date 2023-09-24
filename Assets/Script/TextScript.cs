@@ -16,12 +16,14 @@ public class TextScript : MonoBehaviour
     public Text textline;
     [HideInInspector]
     public bool coroutine_lock = false;
+    [HideInInspector]
+    public int cursor;
 
     // Start is called before the first frame update
 
-    public IEnumerator ShowText(string name, string text)
+    public IEnumerator ShowText(string name, string text, bool textlock)
     {
-        nameline.text = text;
+        nameline.text = name;
         coroutine_lock = true;
         int maxlength = text.Length;
         float speed = 0.1f;
@@ -40,7 +42,7 @@ public class TextScript : MonoBehaviour
 
             yield return new WaitForSeconds(speed);
         }
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        if(textlock) yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
 
         coroutine_lock = false;
     }
@@ -48,7 +50,7 @@ public class TextScript : MonoBehaviour
     // Update is called once per frame
     public IEnumerator Selecting(int max, params string[] s)
     {
-        int k = 1;
+        cursor = 1;
         coroutine_lock = true;
 
         if(max == 2) GameObject.Find("Barlist").transform.Find("2_Bar").gameObject.SetActive(true);
@@ -68,19 +70,19 @@ public class TextScript : MonoBehaviour
         {
             for (int i = 1; i <= max; i++)
             {
-                if (i == k) Bar[i].GetComponent<Animator>().Play("Highlight");
+                if (i == cursor) Bar[i].GetComponent<Animator>().Play("Highlight");
                 else Bar[i].GetComponent<Animator>().Play("ResetColor");
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if (k > 1) k--;
-                Debug.Log("Cursor : " + k);
+                if (cursor > 1) cursor--;
+                Debug.Log("Cursor : " + cursor);
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (k < max) k++;
-                Debug.Log("Cursor : " + k);
+                if (cursor < max) cursor++;
+                Debug.Log("Cursor : " + cursor);
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -90,7 +92,7 @@ public class TextScript : MonoBehaviour
             yield return null;
         }
 
-        Bar[k].GetComponent<Animator>().Play("ResetColor");
+        Bar[cursor].GetComponent<Animator>().Play("ResetColor");
         Debug.Log("Selected");
 
         if (max == 2)GameObject.Find("2_Bar").gameObject.SetActive(false);
