@@ -1,65 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    Rigidbody2D rigid2d;
     public float MoveSpeed;
     private bool Lock = false;
     Vector2 newpositon = new Vector2();
-    enum Direction
+
+    Vector2 dir = Vector2.zero;
+    Vector2 lastinput = Vector2.zero;
+
+    private void Start()
     {
-        up,
-        down,
-        left,
-        right,
-        none
+        rigid2d = GetComponent<Rigidbody2D>();
     }
 
-    Direction dir = Direction.none;
-    Direction lastinput = Direction.none;
-    
     void setDirection()
     {
-        if (Input.GetButton("left")) dir = Direction.left;
-        if (Input.GetButton("right")) dir = Direction.right;
-        if (Input.GetButton("up")) dir = Direction.up;
-        if (Input.GetButton("down")) dir = Direction.down;
+        if (Input.GetButton("left")) dir = Vector2.left;
+        if (Input.GetButton("right")) dir = Vector2.right;
+        if (Input.GetButton("up")) dir = Vector2.up;
+        if (Input.GetButton("down")) dir = Vector2.down;
 
-        if (Input.GetButton("left") && lastinput == Direction.left) dir = Direction.left;
-        if (Input.GetButton("right") && lastinput == Direction.right) dir = Direction.right;
-        if (Input.GetButton("up") && lastinput == Direction.up) dir = Direction.up;
-        if (Input.GetButton("down") && lastinput == Direction.down) dir = Direction.down;
+        if (Input.GetButton("left") && lastinput == Vector2.left) dir = Vector2.left;
+        if (Input.GetButton("right") && lastinput == Vector2.right) dir = Vector2.right;
+        if (Input.GetButton("up") && lastinput == Vector2.up) dir = Vector2.up;
+        if (Input.GetButton("down") && lastinput == Vector2.down) dir = Vector2.down;
 
         getLastInput();
     }
 
     void getLastInput()
     {
-        if (Input.GetButtonDown("left")) lastinput = Direction.left;
-        if (Input.GetButtonDown("right")) lastinput = Direction.right;
-        if (Input.GetButtonDown("up")) lastinput = Direction.up;
-        if (Input.GetButtonDown("down")) lastinput = Direction.down;
+        if (Input.GetButtonDown("left")) lastinput = Vector2.left;
+        if (Input.GetButtonDown("right")) lastinput = Vector2.right;
+        if (Input.GetButtonDown("up")) lastinput = Vector2.up;
+        if (Input.GetButtonDown("down")) lastinput = Vector2.down;
     }
 
     // Update is called once per frame
     void Update()
     {
         setDirection();
-        if (dir != Direction.none && !Lock)
+        Debug.DrawRay(gameObject.transform.position, dir, Color.yellow);
+        if (dir != Vector2.zero && !Lock)
         {
             Lock = true;
+
+            if (dir == Vector2.left) newpositon = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y);
+            if (dir == Vector2.right) newpositon = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y);
+            if (dir == Vector2.up) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+            if (dir == Vector2.down) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
+
+
+
+            RaycastHit2D hit = Physics2D.Raycast(rigid2d.position, dir, 1f, LayerMask.GetMask("Entity"));
             
-            if (dir == Direction.left) newpositon = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y);
-            if (dir == Direction.right) newpositon = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y);
-            if (dir == Direction.up) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
-            if (dir == Direction.down) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
-
-            Debug.Log(dir);
-
-            StartCoroutine("Walking", 1f/MoveSpeed);
+            if (hit.collider == null)
+            {
+                StartCoroutine("Walking", 1f / MoveSpeed);
+                Debug.Log(dir);
+            }
+            else
+            {
+                Lock = false;
+                dir = Vector2.zero;
+            }
         }
-        
     }
 
     IEnumerator Walking(float time)
@@ -73,7 +83,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         Lock = false;
-        dir = Direction.none;
+        dir = Vector2.zero;
 
     }
 }
