@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -60,11 +58,11 @@ public class PlayerMove : MonoBehaviour
             if (dir == Vector2.down) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
 
 
-            look = dir;
+            if(MoveSpeed != 0f) look = dir;
 
             RaycastHit2D hit = Physics2D.Raycast(rigid2d.position, dir, 1f, LayerMask.GetMask("Obstacle"));
             
-            if (hit.collider == null)
+            if (hit.collider == null && MoveSpeed != 0f)
             {
                 StartCoroutine("Walking", 1f / MoveSpeed);
                 Debug.Log(dir);

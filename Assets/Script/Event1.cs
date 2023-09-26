@@ -35,6 +35,8 @@ public class Event1 : MonoBehaviour
     }
     IEnumerator Fullshow()
     {
+        float temp = playerMove.MoveSpeed;
+        playerMove.MoveSpeed = 0;
         UI.SetActive(true);
         scriptlock = true;
 
@@ -68,6 +70,7 @@ public class Event1 : MonoBehaviour
         }
         scriptlock = false;
         UI.SetActive(false);
+        playerMove.MoveSpeed = temp;
     }
 
     private void Update()
