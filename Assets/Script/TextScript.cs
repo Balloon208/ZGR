@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -95,7 +94,7 @@ public class TextScript : MonoBehaviour
         Bar[cursor].GetComponent<Animator>().Play("ResetColor");
         Debug.Log("Selected");
 
-        if (max == 2)GameObject.Find("2_Bar").gameObject.SetActive(false);
+        if (max == 2) GameObject.Find("2_Bar").gameObject.SetActive(false);
         if (max == 4) GameObject.Find("4_Bar").gameObject.SetActive(false);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     Vector2 newpositon = new Vector2();
 
     Vector2 dir = Vector2.zero;
+    public Vector2 look = Vector2.zero;
     Vector2 lastinput = Vector2.zero;
 
     private void Start()
@@ -45,7 +47,9 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         setDirection();
+
         Debug.DrawRay(gameObject.transform.position, dir, Color.yellow);
+        Debug.DrawRay(gameObject.transform.position, look, Color.red);
         if (dir != Vector2.zero && !Lock)
         {
             Lock = true;
@@ -56,8 +60,9 @@ public class PlayerMove : MonoBehaviour
             if (dir == Vector2.down) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
 
 
+            look = dir;
 
-            RaycastHit2D hit = Physics2D.Raycast(rigid2d.position, dir, 1f, LayerMask.GetMask("Entity"));
+            RaycastHit2D hit = Physics2D.Raycast(rigid2d.position, dir, 1f, LayerMask.GetMask("Obstacle"));
             
             if (hit.collider == null)
             {
@@ -84,6 +89,5 @@ public class PlayerMove : MonoBehaviour
 
         Lock = false;
         dir = Vector2.zero;
-
     }
 }

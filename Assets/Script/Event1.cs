@@ -5,21 +5,39 @@ using UnityEngine.UI;
 
 public class Event1 : MonoBehaviour
 {
-    public int k = 1;
+    PlayerMove playerMove;
+    GameObject UI;
+    private bool scriptlock = false;
+    private int k = 1;
     TextScript ts;
+    RaycastHit2D lookhit;
 
-    public void 대화()
+    void CheckHit()
     {
-        Debug.Log("대화");
+        lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.zero, 0f);
+
+        if (playerMove.look == Vector2.down) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1f, LayerMask.GetMask("PlayerEntity"));
+        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.up) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1f, LayerMask.GetMask("PlayerEntity"));
+        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.right) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1f, LayerMask.GetMask("PlayerEntity"));
+        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.left) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1f, LayerMask.GetMask("PlayerEntity"));
+        if (lookhit.collider != null && lookhit.collider.tag == "Player")
+        {
+            Debug.Log("asdfghjuytrdv");
+            StartCoroutine(Fullshow());
+        }
     }
 
     private void Awake()
     {
         ts = GameObject.Find("GameManager").GetComponent<TextScript>();
+        UI = GameObject.Find("Canvas").transform.Find("UI").gameObject;
+        playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
     IEnumerator Fullshow()
     {
-        대화();
+        UI.SetActive(true);
+        scriptlock = true;
+
         StartCoroutine(ts.ShowText("김민준", "어이 거기 너! 미연시 게임을 새로 개발할까 생각중인데, 어떻게 생각해?", false));
         yield return new WaitUntil(() => ts.coroutine_lock == false);
         StartCoroutine(ts.Selecting(2, "엄청나요!", "끔찍해요"));
@@ -48,11 +66,19 @@ public class Event1 : MonoBehaviour
                 yield return new WaitUntil(() => ts.coroutine_lock == false);
             }
         }
-        
+        scriptlock = false;
+        UI.SetActive(false);
     }
 
-    public void StartScript()
+    private void Update()
     {
-        StartCoroutine(Fullshow());
+        Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
+        Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
+        Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
+        Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
+        if (Input.GetKeyDown(KeyCode.C) && scriptlock == false)
+        {
+            CheckHit();
+        }
     }
 }
