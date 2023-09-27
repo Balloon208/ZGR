@@ -11,6 +11,7 @@ TagManager:
   - Nameline
   - Select3
   - Select4
+  - npc
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Entity
-  - 
+  - PlayerEntity
+  - Obstacle
   - 
   - 
   - 
