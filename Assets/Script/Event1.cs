@@ -3,37 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Event1 : MonoBehaviour
+public class Event1 : EventManager
 {
-    PlayerMove playerMove;
-    GameObject UI;
-    private bool scriptlock = false;
-    private int k = 1;
-    TextScript ts;
-    RaycastHit2D lookhit;
-
-    void CheckHit()
-    {
-        lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.zero, 0f);
-
-        if (playerMove.look == Vector2.down) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1f, LayerMask.GetMask("PlayerEntity"));
-        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.up) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1f, LayerMask.GetMask("PlayerEntity"));
-        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.right) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1f, LayerMask.GetMask("PlayerEntity"));
-        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.left) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1f, LayerMask.GetMask("PlayerEntity"));
-        if (lookhit.collider != null && lookhit.collider.tag == "Player")
-        {
-            Debug.Log("asdfghjuytrdv");
-            StartCoroutine(Fullshow());
-        }
-    }
-
-    private void Awake()
-    {
-        ts = GameObject.Find("GameManager").GetComponent<TextScript>();
-        UI = GameObject.Find("Canvas").transform.Find("UI").gameObject;
-        playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
-    }
-    IEnumerator Fullshow()
+    protected override IEnumerator Fullshow() // override or not
     {
         float temp = playerMove.MoveSpeed;
         playerMove.MoveSpeed = 0;
@@ -73,7 +45,7 @@ public class Event1 : MonoBehaviour
         playerMove.MoveSpeed = temp;
     }
 
-    private void Update()
+    private void Update() // add
     {
         Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
         Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
