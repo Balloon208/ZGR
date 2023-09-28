@@ -5,19 +5,56 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    [SerializeField]
-    private Object scriptfile;
+    protected PlayerMove playerMove;
+    protected GameObject UI;
+    protected bool scriptlock = false;
+    protected int k = 1;
+    protected TextScript ts;
+    protected RaycastHit2D lookhit;
+
+    protected void CheckHit()
+    {
+        // Check condition to start event
+
+        lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.zero, 0f);
+
+        // Basic : four direction and player is seeing them
+        if (playerMove.look == Vector2.down) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.up, 1f, LayerMask.GetMask("PlayerEntity"));
+        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.up) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, 1f, LayerMask.GetMask("PlayerEntity"));
+        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.right) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.left, 1f, LayerMask.GetMask("PlayerEntity"));
+        if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.left) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1f, LayerMask.GetMask("PlayerEntity"));
+        if (lookhit.collider != null && lookhit.collider.tag == "Player")
+        {
+            Debug.Log("asdfghjuytrdv");
+            StartCoroutine(Fullshow());
+        }
+    }
+
+    protected void Awake()
+    {
+        // Set variables
+        ts = GameObject.Find("GameManager").GetComponent<TextScript>();
+        UI = GameObject.Find("Canvas").transform.Find("UI").gameObject;
+        playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
+    }
+
     protected virtual IEnumerator Fullshow()
     {
         yield return null;
     }
 
-    private void Start()
+    protected void Update()
     {
-        Debug.Log(scriptfile.GetType());
-    }
-    protected void StartScript()
-    {
-        StartCoroutine(Fullshow());
+        // Debugging
+        Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
+        Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
+        Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
+        Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
+
+        // Get Interaction key
+        if (Input.GetKeyDown(KeyCode.C) && scriptlock == false)
+        {
+            CheckHit();
+        }
     }
 }
