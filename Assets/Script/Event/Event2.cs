@@ -13,36 +13,28 @@ public class Event2 : EventManager
 
         if (GlobalValues.QuestTrigger[0] == 0)
         {
-            StartCoroutine(ts.ShowText("Jerry", "Is Jerry smart?????", false));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
-            StartCoroutine(ts.Selecting(2, "YES!!!!!!", "NO!!!!!!"));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
+            yield return ts.ShowText("Jerry", "Is Jerry smart?????", false);
+            yield return ts.Selecting(2, "YES!!!!!!", "NO!!!!!!");
             k = ts.cursor;
             if (k == 1)
             {
-                StartCoroutine(ts.ShowText("Jerry", "Then, Go to Jarry!", true));
-                yield return new WaitUntil(() => ts.coroutine_lock == false);
-                StartCoroutine(ts.ShowText("Jerry", "He will give you a gift!", true));
-                yield return new WaitUntil(() => ts.coroutine_lock == false);
+                yield return ts.ShowText("Jerry", "Then, Go to Jarry!", true);
+                yield return ts.ShowText("Jerry", "He will give you a gift!", true);
                 GlobalValues.QuestTrigger[0] = 1;
             }
             if (k == 2)
             {
-                StartCoroutine(ts.ShowText("Jerry", "I will kill you in Hypixel Skyblock...", true));
-                yield return new WaitUntil(() => ts.coroutine_lock == false);
+                yield return ts.ShowText("Jerry", "I will kill you in Hypixel Skyblock...", true);
             }
         }
         else if (GlobalValues.QuestTrigger[0] == 1)
         {
-            StartCoroutine(ts.ShowText("Jerry", "Go to Jarry and receive my gift!", true));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
+            yield return ts.ShowText("Jerry", "Go to Jarry and receive my gift!", true);
         }
         else if (GlobalValues.QuestTrigger[0] == 2)
         {
-            StartCoroutine(ts.ShowText("Jerry", "Good Luck!!!! XD", true));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
+            yield return ts.ShowText("Jerry", "Good Luck!!!! XD", true);
         }
-
 
         scriptlock = false;
         UI.SetActive(false);

@@ -13,26 +13,21 @@ public class Event3 : EventManager
 
         if (GlobalValues.QuestTrigger[0] == 0 || GlobalValues.QuestTrigger[0] == 2)
         {
-            StartCoroutine(ts.ShowText("Jarry", "I'm Jarry. and my friend's name is Jerry!", true));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
+            yield return ts.ShowText("Jarry", "I'm Jarry. and my friend's name is Jerry!", true);
         }
         else if (GlobalValues.QuestTrigger[0] == 1)
         {
-            StartCoroutine(ts.ShowText("Jarry", "Oh, Will you receive a gift?", false));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
-            StartCoroutine(ts.Selecting(2, "YES!", "NO!"));
-            yield return new WaitUntil(() => ts.coroutine_lock == false);
+            yield return ts.ShowText("Jarry", "Oh, Will you receive a gift?", false);
+            yield return ts.Selecting(2, "YES!", "NO!");
             k = ts.cursor;
             if (k == 1)
             {
-                StartCoroutine(ts.ShowText("Jerry", "Here you are.", true));
-                yield return new WaitUntil(() => ts.coroutine_lock == false);
+                yield return ts.ShowText("Jerry", "Here you are.", true);
                 GlobalValues.QuestTrigger[0] = 2;
             }
             if (k == 2)
             {
-                StartCoroutine(ts.ShowText("Jerry", "Come again if you want to give a gift", true));
-                yield return new WaitUntil(() => ts.coroutine_lock == false);
+                yield return ts.ShowText("Jerry", "Come again if you want to give a gift", true);
             }
         }
 
