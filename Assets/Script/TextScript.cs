@@ -14,8 +14,6 @@ public class TextScript : MonoBehaviour
     public Text nameline;
     public Text textline;
     [HideInInspector]
-    public bool coroutine_lock = false;
-    [HideInInspector]
     public int cursor;
 
     // Start is called before the first frame update
@@ -23,7 +21,6 @@ public class TextScript : MonoBehaviour
     public IEnumerator ShowText(string name, string text, bool textlock)
     {
         nameline.text = name;
-        coroutine_lock = true;
         int maxlength = text.Length;
         float speed = 0.1f;
 
@@ -42,15 +39,12 @@ public class TextScript : MonoBehaviour
             yield return new WaitForSeconds(speed);
         }
         if(textlock) yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-
-        coroutine_lock = false;
     }
 
     // Update is called once per frame
     public IEnumerator Selecting(int max, params string[] s)
     {
         cursor = 1;
-        coroutine_lock = true;
 
         if(max == 2) GameObject.Find("Barlist").transform.Find("2_Bar").gameObject.SetActive(true);
         if(max == 4) GameObject.Find("Barlist").transform.Find("4_Bar").gameObject.SetActive(true);
@@ -85,7 +79,6 @@ public class TextScript : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                coroutine_lock = false;
                 break;
             }
             yield return null;
