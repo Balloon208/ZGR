@@ -6,7 +6,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     protected PlayerMove playerMove;
-    protected GameObject UI;
+    protected GameObject ChatUI;
     protected bool scriptlock = false;
     protected int k = 1;
     protected TextScript ts;
@@ -34,7 +34,7 @@ public class EventManager : MonoBehaviour
     {
         // Set variables
         ts = GameObject.Find("GameManager").GetComponent<TextScript>();
-        UI = GameObject.Find("Canvas").transform.Find("UI").gameObject;
+        ChatUI = GameObject.Find("Canvas").transform.Find("ChatUI").gameObject;
         playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
 
