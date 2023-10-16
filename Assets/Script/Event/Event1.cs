@@ -9,7 +9,7 @@ public class Event1 : EventManager
     {
         float temp = playerMove.MoveSpeed;
         playerMove.MoveSpeed = 0;
-        UI.SetActive(true);
+        ChatUI.SetActive(true);
         scriptlock = true;
 
         yield return ts.ShowText("김민준", "어이 거기 너! 미연시 게임을 새로 개발할까 생각중인데, 어떻게 생각해?", false);
@@ -34,19 +34,7 @@ public class Event1 : EventManager
             }
         }
         scriptlock = false;
-        UI.SetActive(false);
+        ChatUI.SetActive(false);
         playerMove.MoveSpeed = temp;
-    }
-
-    private void Update() // add
-    {
-        Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
-        Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
-        Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
-        Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
-        if (Input.GetKeyDown(KeyCode.C) && scriptlock == false)
-        {
-            CheckHit();
-        }
     }
 }

@@ -8,14 +8,14 @@ public class Event3 : EventManager
     {
         float temp = playerMove.MoveSpeed;
         playerMove.MoveSpeed = 0;
-        UI.SetActive(true);
+        ChatUI.SetActive(true);
         scriptlock = true;
 
-        if (GlobalValues.QuestTrigger[0] == 0 || GlobalValues.QuestTrigger[0] == 2)
+        if (GameManager.instance.QuestTrigger[0] == 0 || GameManager.instance.QuestTrigger[0] == 2)
         {
             yield return ts.ShowText("Jarry", "I'm Jarry. and my friend's name is Jerry!", true);
         }
-        else if (GlobalValues.QuestTrigger[0] == 1)
+        else if (GameManager.instance.QuestTrigger[0] == 1)
         {
             yield return ts.ShowText("Jarry", "Oh, Will you receive a gift?", false);
             yield return ts.Selecting(2, "YES!", "NO!");
@@ -23,7 +23,7 @@ public class Event3 : EventManager
             if (k == 1)
             {
                 yield return ts.ShowText("Jerry", "Here you are.", true);
-                GlobalValues.QuestTrigger[0] = 2;
+                GameManager.instance.QuestTrigger[0] = 2;
             }
             if (k == 2)
             {
@@ -32,7 +32,7 @@ public class Event3 : EventManager
         }
 
         scriptlock = false;
-        UI.SetActive(false);
+        ChatUI.SetActive(false);
         playerMove.MoveSpeed = temp;
     }
 }
