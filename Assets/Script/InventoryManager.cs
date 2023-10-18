@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -34,8 +36,21 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void loaditems()
+    public void Additem(Item item)
     {
-
+        int count = GameManager.instance.itemcount;
+        for (int i = 0; i < GameManager.instance.itemcount; i++)
+        {
+            if (GameManager.instance.items[i].id == item.id)
+            {
+                GameManager.instance.items[i].amount++;
+                Debug.Log("Find");
+                return;
+            }
+        }
+        GameManager.instance.items[count] = item;
+        GameManager.instance.itemcount++;
+        Debug.Log("Not Find");
+        
     }
 }

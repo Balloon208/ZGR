@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,5 +17,8 @@ public class GameManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
     }
-    public int[] QuestTrigger = new int[10];
+
+    public Item[] items;
+    public int itemcount = 0;
+    public int[] QuestTrigger;
 }
