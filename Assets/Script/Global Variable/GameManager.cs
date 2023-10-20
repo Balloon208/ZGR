@@ -4,6 +4,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+
+    public Item[] items;
+    public int itemcount = 0;
+    public int[] QuestTrigger;
+    private GameObject Inventory;
+    private bool Inventoryopen = false;
     private void Awake()
     {
         if (instance == null)
@@ -16,9 +22,19 @@ public class GameManager : MonoBehaviour
             if (instance != this)
                 Destroy(this.gameObject);
         }
+
+        Inventory = GameObject.Find("Inventory");
+        Inventory.SetActive(false);
     }
 
-    public Item[] items;
-    public int itemcount = 0;
-    public int[] QuestTrigger;
+    
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Inventoryopen = !Inventoryopen;
+            Inventory.SetActive(Inventoryopen);
+        }
+    }
 }
