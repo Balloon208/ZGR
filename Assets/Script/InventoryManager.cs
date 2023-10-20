@@ -49,6 +49,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         GameManager.instance.items[count] = item;
+        GameManager.instance.items[count].amount = 1;
         GameManager.instance.itemcount++;
         Debug.Log("Not Find");
         
