@@ -5,7 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    public Item[] items;
+    public Item[] itemDB;
+    public Item[] useritems;
     public int itemcount = 0;
     public int[] QuestTrigger;
     private GameObject Inventory;

@@ -36,20 +36,24 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void Additem(Item item)
+    public void test()
+    {
+        Additem(1, 1);
+    }
+    public void Additem(int itemid, int amount)
     {
         int count = GameManager.instance.itemcount;
         for (int i = 0; i < GameManager.instance.itemcount; i++)
         {
-            if (GameManager.instance.items[i].id == item.id)
+            if (GameManager.instance.useritems[i].id == itemid)
             {
-                GameManager.instance.items[i].amount++;
+                GameManager.instance.useritems[i].amount+=amount;
                 Debug.Log("Find");
                 return;
             }
         }
-        GameManager.instance.items[count] = item;
-        GameManager.instance.items[count].amount = 1;
+        GameManager.instance.useritems[count] = GameManager.instance.itemDB[itemid];
+        GameManager.instance.useritems[count].amount = amount;
         GameManager.instance.itemcount++;
         Debug.Log("Not Find");
         
