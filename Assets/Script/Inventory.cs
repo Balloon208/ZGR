@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     public void SetInventory()
     {
-        for(int i = 0; i < GameManager.instance.items.Length; i++)
+        for(int i = 0; i < GameManager.instance.useritems.Length; i++)
         {
             GameObject slot = GameObject.Find(string.Format("Slot({0},{1})", i / 8, i % 8));
             Image slotimage = slot.GetComponent<Image>();
@@ -17,8 +17,8 @@ public class Inventory : MonoBehaviour
 
             if (i < GameManager.instance.itemcount)
             {
-                slotimage.sprite = GameManager.instance.items[i].itemImage;
-                value.text = GameManager.instance.items[i].amount.ToString();
+                slotimage.sprite = GameManager.instance.useritems[i].itemImage;
+                value.text = GameManager.instance.useritems[i].amount.ToString();
                 slotimage.color = new Color(255, 255, 255, 1f);
             }
             else

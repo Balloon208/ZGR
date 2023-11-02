@@ -23,6 +23,7 @@ public class Event3 : EventManager
             if (k == 1)
             {
                 yield return ts.ShowText("Jerry", "Here you are.", true);
+                InventoryManager.Instance.Additem(1, 5);
                 GameManager.instance.QuestTrigger[0] = 2;
             }
             if (k == 2)

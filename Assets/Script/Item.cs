@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Item : ScriptableObject
+public class Item : MonoBehaviour
 {
     public int type;
     public int id;
