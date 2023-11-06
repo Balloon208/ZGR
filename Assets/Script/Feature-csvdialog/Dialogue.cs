@@ -103,6 +103,12 @@ public class Dialogue : EventManager
                     eventName = DialogueDictionary[eventname][i].seteventname[0].Trim();
                     yield return null;
                 }
+                else if(name == "Give")
+                {
+                    string[] item = DialogueDictionary[eventname][i].contexts[0].Split("^");
+                    InventoryManager.Instance.Additem(int.Parse(item[0]), int.Parse(item[1]));
+                    yield return null;
+                }
                 else
                 {
                     string nextname = "";
