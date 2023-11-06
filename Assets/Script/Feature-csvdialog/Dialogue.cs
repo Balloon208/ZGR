@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class Dialogue : EventManager
@@ -8,10 +10,11 @@ public class Dialogue : EventManager
     [SerializeField] private TextAsset csvFile = null;
     public static Dictionary<string, TalkData[]> DialogueDictionary = new Dictionary<string, TalkData[]>();
 
-    public struct TalkData
+    public class TalkData
     {
         public string name; // 대사 치는 캐릭터 이름
         public string[] contexts; // 대사 내용
+        public string[] seteventname;
     }
 
     // 대화 이벤트 이름
@@ -36,19 +39,23 @@ public class Dialogue : EventManager
             while (rowvalues[0].Trim() != "end")
             {
                 List<string> contextList = new List<string>();
+                List<string> seteventList = new List<string>();
 
-                TalkData talkData;
+                TalkData talkData = new TalkData();
                 talkData.name = rowvalues[1]; // 캐릭터 이름 열
 
                 do // talkData 하나를 만드는 반복문
                 {
                     contextList.Add(rowvalues[2].ToString());
+                    seteventList.Add(rowvalues[3].ToString());
                     if (++i < rows.Length)
                         rowvalues = rows[i].Split(new char[] { ',' });
                     else break;
                 } while (rowvalues[1] == "" && rowvalues[0] != "end"); // 즉, 한사람의 대사를 전~부 넣어주는 것이다!
 
                 talkData.contexts = contextList.ToArray();
+                talkData.seteventname = seteventList.ToArray();
+
                 talkdatalist.Add(talkData);
             }
 
@@ -58,30 +65,71 @@ public class Dialogue : EventManager
         }
     }
 
-    protected IEnumerator Fullshow(string eventname) // override or not
+    protected IEnumerator Fullshow(string eventname, bool recursive) // override or not
     {
         if (DialogueDictionary.ContainsKey(eventname))
         {
             float temp = playerMove.MoveSpeed;
-            playerMove.MoveSpeed = 0;
-            ChatUI.SetActive(true);
-            scriptlock = true;
+            if (!recursive)
+            {
+                playerMove.MoveSpeed = 0;
+                ChatUI.SetActive(true);
+                scriptlock = true;
+            }
+            
 
             for (int i = 0; i < DialogueDictionary[eventname].Length; i++)
             {
                 string name = DialogueDictionary[eventname][i].name;
 
-                for(int j = 0; j < DialogueDictionary[eventname][i].contexts.Length; j++)
+                if (name == "Select")
                 {
-                    string text = DialogueDictionary[eventname][i].contexts[j];
-                    yield return ts.ShowText(name, text, true);
+                    Debug.Log("Select");
+                    List<string> selectlist = new List<string>();
+                    List<string> seteventList = new List<string>();
+                    for (int j = 0; j < DialogueDictionary[eventname][i].contexts.Length; j++)
+                    {
+                        selectlist.Add(DialogueDictionary[eventname][i].contexts[j]);
+                        seteventList.Add(DialogueDictionary[eventname][i].seteventname[j]);
+                    }
+
+                    yield return ts.Selecting(2, selectlist[0], selectlist[1]);
+                    k = ts.cursor;
+                    eventName = seteventList[k - 1].Trim();
+                    yield return StartCoroutine(Fullshow(eventName, true));
                 }
+                else if(name == "Eventset")
+                {
+                    eventName = DialogueDictionary[eventname][i].seteventname[0].Trim();
+                    yield return null;
+                }
+                else
+                {
+                    string nextname = "";
+                    if(i < DialogueDictionary[eventname].Length-1) nextname = DialogueDictionary[eventname][i + 1].name;
+                    Debug.Log(nextname);
+                    for (int j = 0; j < DialogueDictionary[eventname][i].contexts.Length; j++)
+                    {
+                        string text = DialogueDictionary[eventname][i].contexts[j];
+
+                        bool noskip = true;
+                        if (nextname == "Select")
+                        {
+                            noskip = false;
+                        }
+                        yield return ts.ShowText(name, text, noskip);
+                    }
+                }
+                
                 
             }
 
-            scriptlock = false;
-            ChatUI.SetActive(false);
-            playerMove.MoveSpeed = temp;
+            if(!recursive)
+            {
+                scriptlock = false;
+                ChatUI.SetActive(false);
+                playerMove.MoveSpeed = temp;
+            }
         }
         else
         {
@@ -100,7 +148,7 @@ public class Dialogue : EventManager
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            StartCoroutine(Fullshow(eventName));
+            StartCoroutine(Fullshow(eventName, false));
         }
     }
 }

@@ -11940,8 +11940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fdeaf40e82483458c84dc813df9cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFile: {fileID: 4900000, guid: caf6b401150d1994b875936e16074ee9, type: 3}
-  eventName: "\uD14C\uC2A4\uD2B8 \uC778\uC0AC"
+  csvFile: {fileID: 4900000, guid: 2d6c2c69bee946f40b36eda1dd18e006, type: 3}
+  eventName: FirstHi
 --- !u!1 &1779506308
 GameObject:
   m_ObjectHideFlags: 0
