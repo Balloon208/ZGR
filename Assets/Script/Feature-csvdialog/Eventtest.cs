@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event2 : EventManager
+public class Eventtest : EventManager
 {
     protected override IEnumerator Fullshow(bool recursive) // override or not
     {
@@ -39,5 +39,10 @@ public class Event2 : EventManager
         scriptlock = false;
         ChatUI.SetActive(false);
         playerMove.MoveSpeed = temp;
+    }
+
+    public void Test()
+    {
+        StartCoroutine(Fullshow(false));
     }
 }
