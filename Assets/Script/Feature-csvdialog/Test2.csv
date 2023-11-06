@@ -1,0 +1,24 @@
+EventName,캐릭터 이름,대사,SetEventName
+FirstHi,김민준,"안녕? 내이름은 김민준이야, 만나서 반가워.",
+,Player,안녕 민준아! 만나서 반가워.,
+,김민준,너 민트초코 좋아하니?,
+,Select,응,MintLove
+,,아니,MintHate
+end,,,
+,,,
+GoodHi,김민준,오늘 날씨 참 좋군.,
+end,,,
+,,,
+BadHi,김민준,당장 내 눈앞에서 꺼져.,
+end,,,
+,,,
+MintLove,김민준,역시 너도 민트초코를 좋아하는구나?,
+,,선물로 체력 물약을 줄게.,
+,Give,1^5,
+,Eventset,,GoodHi
+end,,,
+,,,
+MintHate,김민준,너… 반민초단이였어…?,
+,,실망스럽군.,
+,Eventset,,BadHi
+end,,,
