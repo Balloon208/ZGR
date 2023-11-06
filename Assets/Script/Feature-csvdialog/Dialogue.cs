@@ -65,9 +65,9 @@ public class Dialogue : EventManager
         }
     }
 
-    protected IEnumerator Fullshow(string eventname, bool recursive) // override or not
+    protected override IEnumerator Fullshow(bool recursive) // override or not
     {
-        if (DialogueDictionary.ContainsKey(eventname))
+        if (DialogueDictionary.ContainsKey(eventName))
         {
             float temp = playerMove.MoveSpeed;
             if (!recursive)
@@ -78,45 +78,45 @@ public class Dialogue : EventManager
             }
             
 
-            for (int i = 0; i < DialogueDictionary[eventname].Length; i++)
+            for (int i = 0; i < DialogueDictionary[eventName].Length; i++)
             {
-                string name = DialogueDictionary[eventname][i].name;
+                string name = DialogueDictionary[eventName][i].name;
 
                 if (name == "Select")
                 {
                     Debug.Log("Select");
                     List<string> selectlist = new List<string>();
                     List<string> seteventList = new List<string>();
-                    for (int j = 0; j < DialogueDictionary[eventname][i].contexts.Length; j++)
+                    for (int j = 0; j < DialogueDictionary[eventName][i].contexts.Length; j++)
                     {
-                        selectlist.Add(DialogueDictionary[eventname][i].contexts[j]);
-                        seteventList.Add(DialogueDictionary[eventname][i].seteventname[j]);
+                        selectlist.Add(DialogueDictionary[eventName][i].contexts[j]);
+                        seteventList.Add(DialogueDictionary[eventName][i].seteventname[j]);
                     }
 
                     yield return ts.Selecting(2, selectlist[0], selectlist[1]);
                     k = ts.cursor;
                     eventName = seteventList[k - 1].Trim();
-                    yield return StartCoroutine(Fullshow(eventName, true));
+                    yield return StartCoroutine(Fullshow(true));
                 }
                 else if(name == "Eventset")
                 {
-                    eventName = DialogueDictionary[eventname][i].seteventname[0].Trim();
+                    eventName = DialogueDictionary[ eventName][i].seteventname[0].Trim();
                     yield return null;
                 }
                 else if(name == "Give")
                 {
-                    string[] item = DialogueDictionary[eventname][i].contexts[0].Split("^");
+                    string[] item = DialogueDictionary[eventName][i].contexts[0].Split("^");
                     InventoryManager.Instance.Additem(int.Parse(item[0]), int.Parse(item[1]));
                     yield return null;
                 }
                 else
                 {
                     string nextname = "";
-                    if(i < DialogueDictionary[eventname].Length-1) nextname = DialogueDictionary[eventname][i + 1].name;
+                    if(i < DialogueDictionary[eventName].Length-1) nextname = DialogueDictionary[eventName][i + 1].name;
                     Debug.Log(nextname);
-                    for (int j = 0; j < DialogueDictionary[eventname][i].contexts.Length; j++)
+                    for (int j = 0; j < DialogueDictionary[eventName][i].contexts.Length; j++)
                     {
-                        string text = DialogueDictionary[eventname][i].contexts[j];
+                        string text = DialogueDictionary[eventName][i].contexts[j];
 
                         bool noskip = true;
                         if (nextname == "Select")
@@ -140,7 +140,7 @@ public class Dialogue : EventManager
         else
         {
             // 경고 출력하고 null 반환
-            Debug.LogWarning("찾을 수 없는 이벤트 이름 : " + eventname);
+            Debug.LogWarning("찾을 수 없는 이벤트 이름 : " + eventName);
             yield return null;
         }
         
@@ -148,14 +148,6 @@ public class Dialogue : EventManager
     private void Start()
     {
         SetDialogue();
-    }
-
-    public void FixedUpdate()
-    {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(Fullshow(eventName, false));
-        }
     }
 }
 

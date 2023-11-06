@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Eventtest : EventManager
 {
-    protected override IEnumerator Fullshow() // override or not
+    protected override IEnumerator Fullshow(bool recursive) // override or not
     {
         float temp = playerMove.MoveSpeed;
         playerMove.MoveSpeed = 0;
@@ -43,6 +43,6 @@ public class Eventtest : EventManager
 
     public void Test()
     {
-        StartCoroutine(Fullshow());
+        StartCoroutine(Fullshow(false));
     }
 }

@@ -26,7 +26,7 @@ public class EventManager : MonoBehaviour
         if (lookhit.collider != null && lookhit.collider.tag == "Player")
         {
             Debug.Log("asdfghjuytrdv");
-            StartCoroutine(Fullshow());
+            StartCoroutine(Fullshow(false));
         }
     }
 
@@ -38,7 +38,7 @@ public class EventManager : MonoBehaviour
         playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
 
-    protected virtual IEnumerator Fullshow()
+    protected virtual IEnumerator Fullshow(bool recursive)
     {
         yield return null;
     }
