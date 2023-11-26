@@ -25,7 +25,6 @@ public class EventManager : MonoBehaviour
         if ((lookhit.collider == null || lookhit.collider.tag != "Player") && playerMove.look == Vector2.left) lookhit = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 1f, LayerMask.GetMask("PlayerEntity"));
         if (lookhit.collider != null && lookhit.collider.tag == "Player")
         {
-            Debug.Log("asdfghjuytrdv");
             StartCoroutine(Fullshow(false));
         }
     }

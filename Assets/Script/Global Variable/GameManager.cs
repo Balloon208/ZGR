@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance = null;
-
     public Item[] itemDB;
     public Item[] useritems;
     public int itemcount = 0;
@@ -13,17 +11,6 @@ public class GameManager : MonoBehaviour
     private bool Inventoryopen = false;
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            if (instance != this)
-                Destroy(this.gameObject);
-        }
-
         Inventory = GameObject.Find("Inventory");
         Inventory.SetActive(false);
     }

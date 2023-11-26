@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D rigid2d;
     public float MoveSpeed;
-    private bool Lock = false;
+    private bool movelock = false;
     Vector2 newpositon = new Vector2();
 
     Vector2 dir = Vector2.zero;
@@ -20,11 +20,13 @@ public class PlayerMove : MonoBehaviour
 
     void setDirection()
     {
+        // 1. 버튼을 누르고 있는 방향을 감지
         if (Input.GetButton("left")) dir = Vector2.left;
         if (Input.GetButton("right")) dir = Vector2.right;
         if (Input.GetButton("up")) dir = Vector2.up;
         if (Input.GetButton("down")) dir = Vector2.down;
 
+        // 2. 최근 입력이 우선시 되므로, 최근 입력이 들어왔을 경우, 1을 무시하고 최근 입력으로 다시 방향을 설정한다.
         if (Input.GetButton("left") && lastinput == Vector2.left) dir = Vector2.left;
         if (Input.GetButton("right") && lastinput == Vector2.right) dir = Vector2.right;
         if (Input.GetButton("up") && lastinput == Vector2.up) dir = Vector2.up;
@@ -48,15 +50,14 @@ public class PlayerMove : MonoBehaviour
 
         Debug.DrawRay(gameObject.transform.position, dir, Color.yellow);
         Debug.DrawRay(gameObject.transform.position, look, Color.red);
-        if (dir != Vector2.zero && !Lock)
+        if (dir != Vector2.zero && movelock == false)
         {
-            Lock = true;
+            movelock = true;
 
             if (dir == Vector2.left) newpositon = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y);
             if (dir == Vector2.right) newpositon = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y);
             if (dir == Vector2.up) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
             if (dir == Vector2.down) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
-
 
             if(MoveSpeed != 0f) look = dir;
 
@@ -64,18 +65,18 @@ public class PlayerMove : MonoBehaviour
             
             if (hit.collider == null && MoveSpeed != 0f)
             {
-                StartCoroutine("Walking", 1f / MoveSpeed);
+                StartCoroutine("Move", 1f / MoveSpeed);
                 Debug.Log(dir);
             }
             else
             {
-                Lock = false;
+                movelock = false;
                 dir = Vector2.zero;
             }
         }
     }
 
-    IEnumerator Walking(float time)
+    IEnumerator Move(float time)
     {
         while(time > 0.0f)
         {
@@ -85,7 +86,7 @@ public class PlayerMove : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        Lock = false;
+        movelock = false;
         dir = Vector2.zero;
     }
 }
