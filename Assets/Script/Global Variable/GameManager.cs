@@ -15,8 +15,6 @@ public class GameManager : Singleton<GameManager>
         Inventory.SetActive(false);
     }
 
-    
-
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
