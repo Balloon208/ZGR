@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D rigid2d;
+    SpriteRenderer spriteRenderer;
+    public Animator anim;
+    public Sprite[] idlesprite = new Sprite[3];
     public float MoveSpeed;
     private bool movelock = false;
     Vector2 newpositon = new Vector2();
@@ -16,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         rigid2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void setDirection()
@@ -59,7 +64,14 @@ public class PlayerMove : MonoBehaviour
             if (dir == Vector2.up) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
             if (dir == Vector2.down) newpositon = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1);
 
-            if(MoveSpeed != 0f) look = dir;
+            if (MoveSpeed != 0f)
+            {
+                look = dir;
+                if (dir.x > 0) spriteRenderer.flipX = true;
+                if (dir.x < 0) spriteRenderer.flipX = false;
+                anim.SetFloat("Horizontal", dir.x);
+                anim.SetFloat("Vertical", dir.y);
+            }
 
             RaycastHit2D hit = Physics2D.Raycast(rigid2d.position, dir, 1f, LayerMask.GetMask("Obstacle"));
             
@@ -73,6 +85,11 @@ public class PlayerMove : MonoBehaviour
                 movelock = false;
                 dir = Vector2.zero;
             }
+        }
+        else if(dir == Vector2.zero)
+        {
+            anim.SetFloat("Horizontal", look.x/2f);
+            anim.SetFloat("Vertical", look.y/2f);
         }
     }
 
@@ -88,5 +105,12 @@ public class PlayerMove : MonoBehaviour
 
         movelock = false;
         dir = Vector2.zero;
+    }
+
+    public void SetIdle(int i)
+    {
+        if (look == Vector2.down) spriteRenderer.sprite = idlesprite[0];
+        if (look == Vector2.left || look == Vector2.right) spriteRenderer.sprite = idlesprite[1];
+        if (look == Vector2.up) spriteRenderer.sprite = idlesprite[2];
     }
 }
