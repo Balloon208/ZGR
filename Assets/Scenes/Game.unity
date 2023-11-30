@@ -4761,26 +4761,14 @@ GameObject:
   - component: {fileID: 500178394}
   - component: {fileID: 500178393}
   - component: {fileID: 500178392}
-  - component: {fileID: 500178391}
+  - component: {fileID: 500178396}
   m_Layer: 7
-  m_Name: TX Player F (1)
+  m_Name: "\uAE40\uBBFC\uC7CC"
   m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &500178391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500178390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e263a4f3dbdacf34aa2a61dad8ef9ad5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &500178392
 Rigidbody2D:
   serializedVersion: 4
@@ -4895,6 +4883,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &500178396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500178390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38fdeaf40e82483458c84dc813df9cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFile: {fileID: 0}
+  eventName: 
 --- !u!1 &533757567
 GameObject:
   m_ObjectHideFlags: 0
@@ -14061,7 +14063,7 @@ GameObject:
   - component: {fileID: 1755024172}
   - component: {fileID: 1755024173}
   m_Layer: 7
-  m_Name: TX Player F
+  m_Name: "\uAE40\uBBFC\uC900"
   m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14190,9 +14192,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755024168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adef3c4b048ea244c840a91fe7cda3d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 38fdeaf40e82483458c84dc813df9cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  csvFile: {fileID: 4900000, guid: 60747a1a2dc541846876cbc7635dc9ad, type: 3}
+  eventName: Quest1Main
 --- !u!1 &1779506308
 GameObject:
   m_ObjectHideFlags: 0
