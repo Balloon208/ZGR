@@ -42,7 +42,7 @@ public class EventManager : MonoBehaviour
         yield return null;
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         // Debugging
         Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);

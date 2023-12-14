@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class Dialogue : EventManager
+public class NPC : EventManager
 {
     [SerializeField] private TextAsset csvFile = null;
-    public static Dictionary<string, TalkData[]> DialogueDictionary = new Dictionary<string, TalkData[]>();
+    public static Dictionary<string, Dictionary<string, TalkData[]>> DialogueDictionary = new Dictionary<string, Dictionary<string, TalkData[]>>();
 
     public class TalkData
     {
@@ -18,7 +18,7 @@ public class Dialogue : EventManager
     }
 
     // 대화 이벤트 이름
-    [SerializeField] string eventName;
+    public string eventName;
 
     public void SetDialogue()
     {
@@ -60,14 +60,28 @@ public class Dialogue : EventManager
             }
 
             Debug.Log(talkdatalist.Count);
-            DialogueDictionary.Add(eventname, talkdatalist.ToArray());
-
+            
+            if(!DialogueDictionary.ContainsKey(gameObject.name))
+            {
+                DialogueDictionary[gameObject.name] = new Dictionary<string, TalkData[]>();
+            }
+            DialogueDictionary[gameObject.name][eventname] = talkdatalist.ToArray();
         }
+    }
+
+    protected virtual void setEventName()
+    {
+        return;
     }
 
     protected override IEnumerator Fullshow(bool recursive) // override or not
     {
-        if (DialogueDictionary.ContainsKey(eventName))
+        if (!recursive)
+        {
+            setEventName();
+        }
+
+        if (DialogueDictionary[gameObject.name].ContainsKey(eventName))
         {
             float temp = playerMove.MoveSpeed;
             if (!recursive)
@@ -76,21 +90,20 @@ public class Dialogue : EventManager
                 ChatUI.SetActive(true);
                 scriptlock = true;
             }
-            
 
-            for (int i = 0; i < DialogueDictionary[eventName].Length; i++)
+            for (int i = 0; i < DialogueDictionary[gameObject.name][eventName].Length; i++)
             {
-                string name = DialogueDictionary[eventName][i].name;
+                string name = DialogueDictionary[gameObject.name][eventName][i].name;
 
                 if (name == "Select")
                 {
                     Debug.Log("Select");
                     List<string> selectlist = new List<string>();
                     List<string> seteventList = new List<string>();
-                    for (int j = 0; j < DialogueDictionary[eventName][i].contexts.Length; j++)
+                    for (int j = 0; j < DialogueDictionary[gameObject.name][eventName][i].contexts.Length; j++)
                     {
-                        selectlist.Add(DialogueDictionary[eventName][i].contexts[j]);
-                        seteventList.Add(DialogueDictionary[eventName][i].seteventname[j]);
+                        selectlist.Add(DialogueDictionary[gameObject.name][eventName][i].contexts[j]);
+                        seteventList.Add(DialogueDictionary[gameObject.name][eventName][i].seteventname[j]);
                     }
 
                     yield return ts.Selecting(2, selectlist[0], selectlist[1]);
@@ -98,25 +111,26 @@ public class Dialogue : EventManager
                     eventName = seteventList[k - 1].Trim();
                     yield return StartCoroutine(Fullshow(true));
                 }
-                else if(name == "Eventset")
+                else if(name == "SetQuest")
                 {
-                    eventName = DialogueDictionary[ eventName][i].seteventname[0].Trim();
+                    string[] item = DialogueDictionary[gameObject.name][eventName][i].contexts[0].Split("^");
+                    QuestManager.Instance.QuestDictionary[int.Parse(item[0])].questprocess = (QuestProcess)Enum.Parse(typeof(QuestProcess),item[1]);
                     yield return null;
                 }
                 else if(name == "Give")
                 {
-                    string[] item = DialogueDictionary[eventName][i].contexts[0].Split("^");
+                    string[] item = DialogueDictionary[gameObject.name][eventName][i].contexts[0].Split("^");
                     InventoryManager.Instance.Additem(int.Parse(item[0]), int.Parse(item[1]));
                     yield return null;
                 }
                 else
                 {
                     string nextname = "";
-                    if(i < DialogueDictionary[eventName].Length-1) nextname = DialogueDictionary[eventName][i + 1].name;
+                    if(i < DialogueDictionary[gameObject.name][eventName].Length-1) nextname = DialogueDictionary[gameObject.name][eventName][i + 1].name;
                     Debug.Log(nextname);
-                    for (int j = 0; j < DialogueDictionary[eventName][i].contexts.Length; j++)
+                    for (int j = 0; j < DialogueDictionary[gameObject.name][eventName][i].contexts.Length; j++)
                     {
-                        string text = DialogueDictionary[eventName][i].contexts[j];
+                        string text = DialogueDictionary[gameObject.name][eventName][i].contexts[j];
 
                         bool noskip = true;
                         if (nextname == "Select")

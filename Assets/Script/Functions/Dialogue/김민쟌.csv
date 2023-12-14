@@ -1,0 +1,8 @@
+﻿EventNane,캐릭터 이름,대사,SetEventName
+Normal,김민쟌,안녕... 난 저주를 받아 고양이가 된 김민쟌이라고 해...,
+end,,,
+,,,
+Quest1Processing,김민쟌,오… 체력 포션을 주다니…,
+,,정말 고마워..,
+,SetQuest,1^Completed,
+end,,,

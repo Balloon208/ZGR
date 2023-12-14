@@ -4892,10 +4892,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 500178390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fdeaf40e82483458c84dc813df9cf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 678fce4d071adf64eb5a6dd14b0ea09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvFile: {fileID: 0}
+  csvFile: {fileID: 4900000, guid: e0756e57e93bf2c48a000a9a04bb3c6f, type: 3}
   eventName: 
 --- !u!1 &533757567
 GameObject:
@@ -9944,6 +9944,7 @@ GameObject:
   - component: {fileID: 850498845}
   - component: {fileID: 850498847}
   - component: {fileID: 850498848}
+  - component: {fileID: 850498849}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10036,7 +10037,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   itemcount: 0
-  QuestTrigger: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &850498849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850498844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951f22046f89dfe408a20853035d49f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFile: {fileID: 4900000, guid: ac6cf2e71225f274ba2db1b09d0d3d7e, type: 3}
 --- !u!1 &865027041
 GameObject:
   m_ObjectHideFlags: 0
@@ -10708,7 +10721,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078381471}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38fdeaf40e82483458c84dc813df9cf9, type: 3}
   m_Name: 
@@ -14192,11 +14205,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755024168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fdeaf40e82483458c84dc813df9cf9, type: 3}
+  m_Script: {fileID: 11500000, guid: c82eb0b919dbad54a8a6a887914e595e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   csvFile: {fileID: 4900000, guid: 60747a1a2dc541846876cbc7635dc9ad, type: 3}
-  eventName: Quest1Main
+  eventName: 
 --- !u!1 &1779506308
 GameObject:
   m_ObjectHideFlags: 0

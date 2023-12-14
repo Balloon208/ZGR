@@ -1,6 +1,6 @@
-EventNane,캐릭터 이름,대사,SetEventName
-NormalHi,김민준,안녕? 난 저주를 받아 고양이가 된 김민준이라고 해.,
-,,,
+﻿EventNane,캐릭터 이름,대사,SetEventName
+Normal,김민준,안녕? 난 저주를 받아 고양이가 된 김민준이라고 해.,
+end,,,
 ,,,
 Quest1Main,김민준,안녕? 난 김민준이라고 해.,
 ,,나쁜 마녀의 저주를 받아서 고양이 벽이 되었지…,
@@ -11,18 +11,17 @@ end,,,
 ,,,
 Quest1Accept,김민준,고마워! 옆에 있는 친구에게 체력 포션을 주고 나에게 다시 찾아와.,
 ,Give,1^5,
-,EventSet,,Quest1Processing
+,SetQuest,1^Processing,
 end,,,
 ,,,
 Quest1Deny,김민준,그러면 나중에 시간이 나면 도와줘…!,
-,EventSet,,Quest1Main
 end,,,
 ,,,
 Quest1Processing,김민준,얼른 친구에게 체력 포션을 건내주고 와!,
 end,,,
 ,,,
-Quest1Success,김민준,도와줘서 고마워..!,
+,,,
+Quest1Completed,김민준,도와줘서 고마워..!,
 ,,답례로 남는 체력 포션을 나눠줄게.,
 ,Give,1^10,
-,EventSet,,NormalHi
 end,,,

@@ -6,7 +6,6 @@ public class GameManager : Singleton<GameManager>
     public Item[] itemDB;
     public Item[] useritems;
     public int itemcount = 0;
-    public int[] QuestTrigger;
     private GameObject Inventory;
     private bool Inventoryopen = false;
     private void Awake()
