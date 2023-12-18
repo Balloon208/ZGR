@@ -10,7 +10,14 @@ public class kimminjan : NPC
         eventName = "Normal";
         if (QuestManager.Instance.QuestDictionary[1].questprocess == QuestProcess.Processing)
         {
-            eventName = "Quest1Processing";
+            if(InventoryManager.Instance.Finditem(1) >= 5)
+            {
+                eventName = "Quest1ProcessingSuccess";
+            }
+            else
+            {
+                eventName = "Quest1ProcessingFail";
+            }
         }
         else if (QuestManager.Instance.QuestDictionary[2].questprocess == QuestProcess.Startable)
         {

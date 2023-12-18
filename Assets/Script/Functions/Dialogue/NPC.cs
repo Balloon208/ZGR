@@ -132,7 +132,7 @@ public class NPC : EventManager
                     {
                         string text = DialogueDictionary[gameObject.name][eventName][i].contexts[j];
 
-                        bool noskip = true;
+                        bool noskip = true; // skip
                         if (nextname == "Select")
                         {
                             noskip = false;

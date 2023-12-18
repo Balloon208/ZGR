@@ -28,4 +28,17 @@ public class InventoryManager : Singleton<InventoryManager>
         GameManager.Instance.itemcount++;
         Debug.Log("Not Find");
     }
+
+    public int Finditem(int itemid)
+    {
+        for (int i = 0; i < GameManager.Instance.itemcount; i++)
+        {
+            // 아이템이 존재한다면 개수만 증가
+            if (GameManager.Instance.useritems[i].id == itemid)
+            {
+                return GameManager.Instance.useritems[i].amount;
+            }
+        }
+        return 0;
+    }
 }
